@@ -77,7 +77,7 @@
     CGContextAddLineToPoint(ctx, CGRectGetMaxX(rect), y);
     
     CGContextSetStrokeColorWithColor(ctx, color.CGColor);
-    CGContextSetLineWidth(ctx, 1.5);
+    CGContextSetLineWidth(ctx, 1);
     CGContextStrokePath(ctx);
     
     CGContextRestoreGState(ctx);
