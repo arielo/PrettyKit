@@ -137,6 +137,8 @@ typedef enum {
  Its value is 0.7 by default. */
 @property (nonatomic, assign) float shadowOpacity;
 
+@property (nonatomic, assign) CGFloat borderWidth;
+
 /** Specifies the background color to use. 
  
  By default is set to `nil`, so the background color will be the UITableViewCell's 

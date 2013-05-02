@@ -31,25 +31,6 @@
 #import "PrettyDrawing.h"
 
 #define label_margin 2
-#define SEGMENTED_CONTROL_BLUE_TOP_BORDER_COLOR [UIColor colorWithHex:0x5398d9]
-#define SEGMENTED_CONTROL_BLUE_GRADIENT_START_COLOR [UIColor colorWithHex:0x4994d8]
-#define SEGMENTED_CONTROL_BLUE_GRADIENT_END_COLOR [UIColor colorWithHex:0x2e78cb]
-#define SEGMENTED_CONTROL_BLUE_BOTTOM_BORDER_COLOR [UIColor colorWithHex:0x2e78cb]
-
-#define SEGMENTED_CONTROL_PRESSED_BLUE_TOP_BORDER_COLOR [UIColor colorWithHex:0x1d4b85]
-#define SEGMENTED_CONTROL_PRESSED_BLUE_GRADIENT_START_COLOR [UIColor colorWithHex:0x2c73cc]
-#define SEGMENTED_CONTROL_PRESSED_BLUE_GRADIENT_END_COLOR [UIColor colorWithHex:0x4d95db]
-#define SEGMENTED_CONTROL_PRESSED_BLUE_BOTTOM_BORDER_COLOR [UIColor colorWithHex:0x4d95db]
-
-#define SEGMENTED_CONTROL_GREEN_TOP_BORDER_COLOR [UIColor colorWithHex:0x60bc90]
-#define SEGMENTED_CONTROL_GREEN_GRADIENT_START_COLOR [UIColor colorWithHex:0x58b889]
-#define SEGMENTED_CONTROL_GREEN_GRADIENT_END_COLOR [UIColor colorWithHex:0x399f68]
-#define SEGMENTED_CONTROL_GREEN_BOTTOM_BORDER_COLOR [UIColor colorWithHex:0x399f68]
-
-#define SEGMENTED_CONTROL_PRESSED_GREEN_TOP_BORDER_COLOR [UIColor colorWithHex:0x266b46]
-#define SEGMENTED_CONTROL_PRESSED_GREEN_GRADIENT_START_COLOR [UIColor colorWithHex:0x339660]
-#define SEGMENTED_CONTROL_PRESSED_GREEN_GRADIENT_END_COLOR [UIColor colorWithHex:0x5cbe8d]
-#define SEGMENTED_CONTROL_PRESSED_GREEN_BOTTOM_BORDER_COLOR [UIColor colorWithHex:0x5cbe8d]
 
 @interface PrettyGridSubview : UIButton {
     BOOL _gradientVisible;
@@ -108,7 +89,7 @@
     {
         if (label == self.cell.textLabel) 
         {
-            font = [UIFont boldSystemFontOfSize:[UIFont labelFontSize]];
+            font = [UIFont fontWithName:@"MyriadPro-SemiBold" size:[UIFont labelFontSize]];
         }
         
         else if (label == self.cell.detailTextLabel) 
@@ -164,77 +145,7 @@
 
 - (void) drawSelectionGradientInRect:(CGRect)rect 
 {
-    [PrettyDrawing drawGradient:rect fromColor:SEGMENTED_CONTROL_PRESSED_GREEN_GRADIENT_START_COLOR toColor:SEGMENTED_CONTROL_PRESSED_GREEN_GRADIENT_END_COLOR];
-    
-    [PrettyDrawing drawGradient:CGRectMake(160, 0, 160, 44) fromColor:SEGMENTED_CONTROL_BLUE_GRADIENT_START_COLOR toColor:SEGMENTED_CONTROL_BLUE_GRADIENT_END_COLOR];
-}
-
-- (void) drawGreenGradientInRect:(CGRect)rect
-{
-    rect = CGRectMake(159, 0, 170, 44);
-    [PrettyDrawing drawGradient:CGRectMake(159, 0, 170, 44) fromColor:SEGMENTED_CONTROL_PRESSED_GREEN_GRADIENT_START_COLOR toColor:SEGMENTED_CONTROL_PRESSED_GREEN_GRADIENT_END_COLOR];
-    
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGPathRef roundedRect = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(159, -1, rect.size.width-1, 1) cornerRadius:self.layer.cornerRadius].CGPath;
-    
-    // inner shadow
-    CGContextAddPath(context, roundedRect);
-    CGContextSetShadowWithColor(UIGraphicsGetCurrentContext(), CGSizeMake(0, 1), 1, [UIColor colorWithWhite:0 alpha:0.4].CGColor);
-    CGContextSetStrokeColorWithColor(context, [UIColor colorWithWhite:0 alpha:0.4].CGColor);
-    CGContextStrokePath(context);
-    
-    CGRect leftShadowRect = CGRectMake(rect.origin.x, 0, 0.5, 44);
-    CGRect rightShadowRect = CGRectMake(self.bounds.size.width, 0, 0.5, 44);
-    
-    CGPathRef leftRectPath = [UIBezierPath bezierPathWithRect:leftShadowRect].CGPath;
-    CGPathRef rightRectPath = [UIBezierPath bezierPathWithRect:rightShadowRect].CGPath;
-    
-    // left shadow
-    CGContextAddPath(context, leftRectPath);
-    CGContextSetShadowWithColor(UIGraphicsGetCurrentContext(), CGSizeMake(0, 1), 1, [UIColor colorWithWhite:0 alpha:0.4].CGColor);
-    CGContextSetStrokeColorWithColor(context, [UIColor colorWithWhite:0 alpha:0.4].CGColor);
-    CGContextStrokePath(context);
-    
-    // right shadow
-    CGContextAddPath(context, rightRectPath);
-    CGContextSetShadowWithColor(UIGraphicsGetCurrentContext(), CGSizeMake(0, 1), 1, [UIColor colorWithWhite:0 alpha:0.4].CGColor);
-    CGContextSetStrokeColorWithColor(context, [UIColor colorWithWhite:0 alpha:0.4].CGColor);
-    CGContextStrokePath(context);
-}
-
-- (void) drawBlueGradientInRect:(CGRect)rect
-{
-    rect = CGRectMake(0, 0, rect.size.width, 44);
-    [PrettyDrawing drawGradient:rect fromColor:
-     SEGMENTED_CONTROL_PRESSED_BLUE_GRADIENT_START_COLOR
-                        toColor:SEGMENTED_CONTROL_PRESSED_BLUE_GRADIENT_END_COLOR];
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGPathRef roundedRect = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, -1, rect.size.width-1, 1) cornerRadius:self.layer.cornerRadius].CGPath;
-    
-    // inner shadow
-    CGContextAddPath(context, roundedRect);
-    CGContextSetShadowWithColor(UIGraphicsGetCurrentContext(), CGSizeMake(0, 1), 1, [UIColor colorWithWhite:0 alpha:0.4].CGColor);
-    CGContextSetStrokeColorWithColor(context, [UIColor colorWithWhite:0 alpha:0.4].CGColor);
-    CGContextStrokePath(context);
-    
-    CGRect leftShadowRect = CGRectMake(0, 0, 0.5, 44);
-    CGRect rightShadowRect = CGRectMake(rect.size.width - 1, 0, 0.5, 44);
-    
-    CGPathRef leftRectPath = [UIBezierPath bezierPathWithRect:leftShadowRect].CGPath;
-    CGPathRef rightRectPath = [UIBezierPath bezierPathWithRect:rightShadowRect].CGPath;
-    
-    // left shadow
-    CGContextAddPath(context, leftRectPath);
-    CGContextSetShadowWithColor(UIGraphicsGetCurrentContext(), CGSizeMake(0, 1), 1, [UIColor colorWithWhite:0 alpha:0.4].CGColor);
-    CGContextSetStrokeColorWithColor(context, [UIColor colorWithWhite:0 alpha:0.4].CGColor);
-    CGContextStrokePath(context);
-    
-    // right shadow
-    CGContextAddPath(context, rightRectPath);
-    CGContextSetShadowWithColor(UIGraphicsGetCurrentContext(), CGSizeMake(0, 1), 1, [UIColor colorWithWhite:0 alpha:0.4].CGColor);
-    CGContextSetStrokeColorWithColor(context, [UIColor colorWithWhite:0 alpha:0.4].CGColor);
-    CGContextStrokePath(context);
-    
+    [PrettyDrawing drawGradient:rect fromColor:self.cell.selectionGradientStartColor toColor:self.cell.selectionGradientEndColor];
 }
 
 - (CGSize) detailTextSizeAtIndex:(int)i width:(float)width rect:(CGRect)rect
@@ -287,9 +198,9 @@
         y = y / 2;
         textRect = CGRectMake(x, y, width, textSize.height);
 
-        textSize = [self drawText:text
-                     basedOnLabel:self.cell.textLabel
-                           inRect:textRect showAsSelected:selected];
+        [self drawText:text
+          basedOnLabel:self.cell.textLabel
+                inRect:textRect showAsSelected:selected];
     }
     
     if (detailText) 
@@ -303,58 +214,36 @@
 
 - (void) drawBackground:(CGRect)rect
 {
-    if (rect.origin.x == 0)
+    if (self.cell.gradientStartColor && self.cell.gradientEndColor) 
     {
-        [PrettyDrawing drawGradient:CGRectMake(0, 0, 159, 44) fromColor:SEGMENTED_CONTROL_BLUE_GRADIENT_START_COLOR toColor:SEGMENTED_CONTROL_BLUE_GRADIENT_END_COLOR];
-    }else {
-        [PrettyDrawing drawGradient:CGRectMake(159, 0, 170, 44) fromColor:SEGMENTED_CONTROL_GREEN_GRADIENT_START_COLOR toColor:SEGMENTED_CONTROL_GREEN_GRADIENT_END_COLOR];
-    }
-    if ([[self.imageView subviews] count] < 2)
-    {
-        UIImageView *phoneImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"segmented_control_phone-icon_white.png"]];
-        phoneImageView.opaque = YES;
-        UIImageView *messageImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"messagesTab.png"]];
-        phoneImageView.frame = CGRectMake(190, 6, 30, 30);
-        messageImageView.frame = CGRectMake(30, 6, 35, 35);
-        messageImageView.opaque = YES;
-        [self.imageView addSubview:phoneImageView];
-        [self.imageView addSubview:messageImageView];
+        CGGradientRef gradient = [(PrettyTableViewCell *)self.cell newNormalGradient];
+        [PrettyDrawing drawGradient:gradient rect:rect];
+        CGGradientRelease(gradient);
+        return;
     }
     
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    CGContextSaveGState(ctx);
+    
+    CGContextSetFillColorWithColor(ctx, self.backgroundColor.CGColor);
+    CGContextFillRect(ctx, rect);
+    
+    CGContextRestoreGState(ctx);
 }
 
-- (void) drawRect:(CGRect)rect
+- (void) drawRect:(CGRect)rect 
 {
-    
     [self drawBackground:rect];
     
-    UIImageView *phoneImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"segmented_control_phone-icon_white.png"]];
-    phoneImageView.opaque = YES;
-    UIImageView *messageImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"messagesTab.png"]];
-    phoneImageView.frame = CGRectMake(220, 6, 30, 30);
-    messageImageView.frame = CGRectMake(60, 6, 35, 35);
-    messageImageView.opaque = YES;
-    [self addSubview:phoneImageView];
-    [self addSubview:messageImageView];
     
     float width = self.segmentWidth;
     float x = 0;
     
-    for (int i = 0; i < self.cell.numberOfElements; i++)
+    for (int i = 0; i < self.cell.numberOfElements; i++) 
     {
         BOOL selected = self.selectedSegment == i;
-        if (self.selectedSegment == 1) {
-            //[self drawBackground:CGRectMake(0, 0, 160.0f, 44)];
-            [self drawGreenGradientInRect:CGRectMake(160.0f, CGRectGetMinY(rect), 160.0f, 44)];
-            
-        }
         
-        if (self.selectedSegment == 0) {
-            [self drawBackground:CGRectMake(160.0f, 0, 160.0f, 44)];
-            [self drawBlueGradientInRect:CGRectMake(0.0f, CGRectGetMinY(rect), 159.0f, 44)];
-        }
-        
-        if (selected && self.cell.elementSelectionStyle != UITableViewCellSelectionStyleNone)
+        if (selected && self.cell.elementSelectionStyle != UITableViewCellSelectionStyleNone) 
         {
             float selectionWidth = width;
             if (i == self.cell.numberOfElements-1) // last element
@@ -362,8 +251,18 @@
                 selectionWidth += 10; // just to make sure it covers all the surface
             }
             _gradientVisible = YES;
-            //[self drawSelectionGradientInRect:CGRectMake(x, CGRectGetMinY(rect), selectionWidth, CGRectGetMaxY(rect))];
+            NSDictionary *userInfo = [NSDictionary dictionaryWithObject:[NSNumber numberWithInt:self.selectedSegment] forKey:@"Selected Index"];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"Will Select Segment" object:nil userInfo:userInfo];
+            [self drawSelectionGradientInRect:CGRectMake(x, CGRectGetMinY(rect), selectionWidth, CGRectGetMaxY(rect))];
         }
+
+        if (i < self.cell.numberOfElements-1)
+        {
+            [self drawLineAtX:x+width inRect:rect];
+        }
+        
+        [self drawTextsAtIndex:i width:width rect:rect span:x selected:selected];
+        
         x += width;
     }
 }
@@ -632,7 +531,6 @@
 - (void) selectIndex:(int)index 
 {
     PrettyGridSubview *subview = (PrettyGridSubview *)self.customView;
-    
     [subview selectIndex:index];
 }
 

@@ -111,8 +111,6 @@
  erased. */
 @property (nonatomic, assign) int numberOfElements;
 
-
-
 /** @name Managing the labels */
 
 /** Specifies the text alignment used in the grids. */

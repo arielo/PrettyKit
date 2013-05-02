@@ -28,7 +28,7 @@
 
 
 #import "PrettySegmentedControlTableViewCell.h"
-
+#import "PrettyDrawing.h"
 
 @implementation PrettySegmentedControlTableViewCell
 @synthesize selectedIndex;
@@ -70,7 +70,6 @@
 - (void) _setSelectedIndex:(NSInteger)sselectedIndex notifySuper:(BOOL)notify
 {
     selectedIndex = sselectedIndex;
-    
     if (notify)
     {
         [super selectIndex:selectedIndex];
@@ -98,7 +97,6 @@
     }
     [self restartSelectedIndex];
 }
-
 
 - (void) setActionBlock:(void (^)(NSIndexPath *indexPath, int sselectedIndex))actionBlock {
     [super setActionBlock:^(NSIndexPath *indexPath, int sselectedIndex) {

@@ -37,6 +37,7 @@
 #define contentView_margin      2
 
 #define default_radius          10
+#define default_border_width  2
 
 #define default_border_color                    [UIColor colorWithHex:0xBCBCBC]
 #define default_separator_color                 [UIColor colorWithHex:0xCDCDCD] 
@@ -271,7 +272,7 @@ typedef enum {
         CGContextSetShadowWithColor(ctx, CGSizeMake(0, 1), 3, shadowColor.CGColor);
     }   
     CGContextSetStrokeColorWithColor(ctx, self.cell.borderColor.CGColor);
-    CGContextSetLineWidth(ctx, 2 - shadowShift);
+    CGContextSetLineWidth(ctx,self.cell.borderWidth - shadowShift);
     CGContextStrokePath(ctx);
     
     CGContextRestoreGState(ctx);
@@ -395,6 +396,7 @@ typedef enum {
     self.selectionGradientEndColor = default_selection_gradient_end_color;
     self.cornerRadius = default_radius;
     self.shadowOpacity = default_shadow_opacity;
+    self.borderWidth = default_border_width;
     self.customSeparatorStyle = UITableViewCellSeparatorStyleSingleLine;
 }
 
